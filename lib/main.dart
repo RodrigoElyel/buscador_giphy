@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 
-void main(){
+import 'package:giphy/ui/home_page.dart';
+
+void main() {
   runApp(MaterialApp(
-    home: Home(),
+    home: HomePage(),
+    theme: ThemeData(
+        hintColor: Colors.white,
+        primaryColor: Colors.white,
+        inputDecorationTheme: InputDecorationTheme(
+          enabledBorder:
+              OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+          focusedBorder:
+              OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+          hintStyle: TextStyle(color: Colors.amber),
+        )),
   ));
-}
-
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      
-    );
-  }
 }
