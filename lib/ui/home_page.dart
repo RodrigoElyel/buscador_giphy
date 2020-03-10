@@ -54,15 +54,44 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.all(10.0),
             child: TextField(
               decoration: InputDecoration(
-                  labelText: "Search GIF",
+                  labelText: "Search here",
                   labelStyle: TextStyle(color: Colors.white),
                   border: OutlineInputBorder()),
               style: TextStyle(color: Colors.white, fontSize: 18.0),
               textAlign: TextAlign.center,
             ),
           ),
+          Expanded(
+              child: FutureBuilder(
+                  future: _getGifs(),
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                      case ConnectionState.none:
+                        return Container(
+                          width: 200.0,
+                          height: 200.0,
+                          alignment: Alignment.center,
+                          child: CircularProgressIndicator(
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.white),
+                            strokeWidth: 5.0,
+                          ),
+                        );
+                      default:
+                        if (snapshot.hasError)
+                          return Container();
+                        else
+                          return _createGifTable(context, snapshot);
+                    }
+                  })),
         ],
       ),
     );
+
+    Widget _createGifTable(BuildContext context, AsyncSnapshot snapshot) {
+      return GridView.builder(gridDelegate: null, itemBuilder: null);
+    }
+
   }
 }
